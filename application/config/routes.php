@@ -41,8 +41,17 @@
 $route['default_controller'] = "main";
 $route['404_override'] = '';
 
-$route['logout'] = "main/logout";
+
+//FUNCTIONS AND LINKS FOUND IN main.php
 $route['signup'] = "main/signup";
+$route['logout'] = "main/logout";
+
+
+//FUNCTION AND LINKS FOUND IN accounts
+$route['login'] = "account";
+$route['register'] = "account/register";
+
+//FUNCTIONS in
 
 
 /* End of file routes.php */

@@ -74,7 +74,7 @@ $autoload['helper'] = array(
 						'url',
 						'form',
 						'date',
-						'html'
+						'html',
 						);
 
 
