@@ -53,6 +53,9 @@
     			        required: "Please provide a password",
     		    	    minlength: "Your password must be at least 7 characters long",
     		        	equalTo: "Please enter the same password."
+    	    		},
+    	    		email: {
+    	    			required: 'E-Mail address is required'
     	    		}
     			}
 			});
@@ -72,7 +75,7 @@
 				}
 
 				$table = array(
-					'table_open' => '<table border="1" cellpadding="4" cellspacing="0">',
+					'table_open' => '<table border="0" cellpadding="4" cellspacing="0">',
 					'table_close' => '</table>'
 				);
 
@@ -81,7 +84,7 @@
 						array('Username',form_input(array('name'=>'username','id'=>'username','size'=>'20','class'=>'form-control'))),
 						array('Password',form_password(array('name'=>'password','id'=>'password','size'=>'20','class'=>'form-control'))),
 						array(form_button(array('name'=>'signup','id'=>'signup','content'=>'Sign-up','class'=>'btn btn-sm btn-info')),
-							form_submit(array('name'=>'submit','id'=>'submit','value'=>'Login','class'=>'btn btn-sm btn-success')))
+							form_submit(array('name'=>'submit','id'=>'submit','value'=>'Login','class'=>'btn btn-success')))
 							);
 				$this->table->set_template($table);
 				echo $this->table->generate($input);
@@ -95,7 +98,7 @@
 			<?php echo form_open('register', array('id'=>'register'));?>
 			<?php
 				$table = array(
-					'table_open' => '<table border="0" cellpadding="4" cellspacing="5">',
+					'table_open' => '<table border="0" cellpadding="4" cellspacing="0">',
 					'table_close' => '</table>'
 				);
 				$input = array(
