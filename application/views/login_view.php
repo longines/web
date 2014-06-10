@@ -6,6 +6,7 @@
 		<link href="<?php echo base_url();?>bootstrap/css/bootstrap.css" rel="stylesheet">
 		<!-- <link href="<?php echo base_url();?>bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
 		<link href="<?php echo base_url();?>datepicker/css/datepicker.css" rel="stylesheet">
+		<link href="<?php echo base_url();?>includes/main-style.css" rel="stylesheet">
 
 		<script src="http://code.jquery.com/jquery.js"></script><!-- script for jQuery Core -->
 		<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script><!-- script for jQuery UI -->
@@ -16,21 +17,63 @@
 			$(document).ready(function()
 			{
 				$('#register_id').hide();
-				$('#birthdate').datepicker({format: 'yyyy-mm-dd'});
+				$('#birthdate').datepicker({
+					format: 'yyyy-mm-dd'
+				});
 				
 				//CLEAR FORM
 				$('#clear').click(function(){
 					$('form#register')[0].reset();
 				});
 
-				$('#signup').click(function(){
-					$('#register_id').slideToggle('fast',function() {});
+				//REGISTER FORM AS DIALOG
+				$('#create').click(function(){
+					$('#register_id').dialog({
+						width: 400,
+						draggable: false,
+						// modal: true,
+						show: {
+							effect: "blind",
+							duration: 500
+						},
+						hide: {
+							effect: "blind",
+							duration: 500
+						}
+					});
 				});
 
-				// validate signup form on keyup and submit
-				$("form#register_id").validate({
+				// VALIDATE LOGIN
+				$("form#login").validate({
+	    		rules: {
+	    			username: {
+	    				required: true
+	    			},
+	    			password: {
+	    				required: true
+	    			}
+	    		},
+	    		messages: {
+	    			username: {
+	    				required: 'Username is required'
+	    			},
+	    			password: {
+	    				required: 'Password is required'
+	    			}
+	    		},
+	    		errorPlacement: function(error, element) {
+         		   error.appendTo(element.parent("li").next("li"));
+        		}
+				});
+
+				// VALIDATE CREATE ACCOUNT
+				$("form#register").validate({
     			rules: {
-    			    reg_pass: {
+    				username: {
+    					required: true,
+    					minlength: 5
+    				},
+    			    password: {
     			        required: true,
     			        minlength: 5
     			    },
@@ -39,13 +82,27 @@
     		    	    minlength: 5,
     		    	    equalTo: "#reg_pass"
     		    	},
+    		    	firstname: {
+    		    		required: true
+    		    	},
+    		    	lastname: {
+    		    		required: true
+    		    	},
+    		    	birthdate: {
+    		    		required: true,
+    		    		date: true
+    		    	},
     		    	email: {
     		    		required: true,
     		    		email: true
     		    	}
     			},
     			messages: {
-    			    reg_pass: {
+    				username: {
+    					required: "Username is required",
+    					minlength: "Username must be atleast 5 characters long"
+    				},
+    			    password: {
     			        required: "Please provide a password",
     			        minlength: "Your password must be at least 7 characters long"
     			    },
@@ -53,6 +110,16 @@
     			        required: "Please provide a password",
     		    	    minlength: "Your password must be at least 7 characters long",
     		        	equalTo: "Please enter the same password."
+    	    		},
+    	    		firstname: {
+    	    			required: "First name is required"
+    	    		},
+    	    		lastname: {
+    	    			required: "Last name is required"
+    	    		},
+    	    		birthdate: {
+    	    			required: "Birthdate is required",
+    	    			date: "Please enter a valid date"
     	    		},
     	    		email: {
     	    			required: 'E-Mail address is required'
@@ -67,27 +134,26 @@
 		<div id="login_id" align="center" class="form-group has-success">
 			<h2>Login</h2>
 			<?php echo validation_errors();?>
-			<?php echo form_open('login');?>
+			<?php echo form_open('login',array('id'=>'login'));?>
 			<?php
 				if($this->session->flashdata('result') != '')
 				{
 					echo $this->session->flashdata('result');
 				}
 
-				$table = array(
-					'table_open' => '<table border="0" cellpadding="4" cellspacing="0">',
-					'table_close' => '</table>'
-				);
-
-				$input = array(
-						array('',''),
-						array('Username',form_input(array('name'=>'username','id'=>'username','size'=>'20','class'=>'form-control'))),
-						array('Password',form_password(array('name'=>'password','id'=>'password','size'=>'20','class'=>'form-control'))),
-						array(form_button(array('name'=>'signup','id'=>'signup','content'=>'Sign-up','class'=>'btn btn-sm btn-info')),
-							form_submit(array('name'=>'submit','id'=>'submit','value'=>'Login','class'=>'btn btn-success')))
-							);
-				$this->table->set_template($table);
-				echo $this->table->generate($input);
+				echo '<div class="login_field">
+						<ul>
+							<li>'.form_input(array('name'=>'username','id'=>'username','placeholder'=>'Enter Username','size'=>'20')).'</li>
+							<li></li>
+							<li>'.form_password(array('name'=>'password','id'=>'password','placeholder'=>'Enter Password','size'=>'20')).'</li>
+							<li></li>
+							<li>'.form_submit(array('name'=>'submit','id'=>'login_submit','value'=>'Login')).'</li>
+							<li><div>
+									<span>OR</span>
+								</div></li>
+							<li>'.form_button(array('name'=>'create','id'=>'create','content'=>'Register Account')).'</li>
+						</ul>
+					</div>';
 			?>
 			<?php echo form_close();?>
 		</div>

@@ -1,0 +1,101 @@
+.datepicker
+{
+	z-index: 999999;
+}
+
+/*LOGIN VIEW*/
+#login_id
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: auto !important;
+	height: auto !important;
+	margin-top: -200px;
+	margin-left: -125px;
+	border-style: solid;
+	border-radius: 5px;
+	border-width: 3px;
+	border-color: #000000;
+	padding: 10px;
+}
+
+#login_id ul
+{
+	list-style: none;
+	padding: 5px;
+	display: inline-block;
+}
+#login_id li
+{
+	display: block;
+	padding: 2px;
+}
+#login_id ul li div
+{
+    border-bottom: 1px solid #000;
+    line-height: 4px;
+    text-align: center;
+    margin: 3px 0px 5px;
+}
+#login_id span
+{
+    background: #FFF;
+    position: relative;
+    bottom: -2px;
+    padding: 0px 5px;
+}
+
+/*REGISTER FORM*/
+#register_id
+{
+	background-color: #FFFFFF;
+	border-style: solid;
+	border-radius: 10px;
+	border-width: 3px;
+	border-color: #000000;
+}
+
+/*INPUT FIELDS*/
+input[type=text],
+input[type=password]
+{
+	width: 200px;
+	height: 35px;
+	border-color: #DDDDDD;
+	border-style: solid;
+    border-radius: 10px;
+    text-align: center;
+}
+input[type=text]:focus,
+input[type=password]:focus
+{
+    box-shadow: 0 0 5px #1C6ACC;
+    border: 1px #1C6ACC;
+}
+input[type=submit]
+{
+	background-color: #009900; 
+}
+input[type=submit]:hover
+{
+	background: #00b100;
+	text-decoration: none;
+}
+#login_submit, #create
+{
+	color: #ffffff;
+	width: 200px;
+	height: 35px;
+	border: 0px;
+	border-radius: 10px;
+	outline: 0px none;
+}
+#create
+{
+	background: #3498db;
+}
+#create:hover {
+	background: #3cb0fd;
+	text-decoration: none;
+}
