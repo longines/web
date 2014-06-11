@@ -30,6 +30,7 @@
 				$('#create').click(function(){
 					$('#register_id').dialog({
 						width: 400,
+						closeText: "[X]" ,
 						draggable: false,
 						// modal: true,
 						show: {
