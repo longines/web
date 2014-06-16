@@ -47,13 +47,14 @@
 }
 
 /*REGISTER FORM*/
-#register_id
+#register
 {
 	background-color: #FFFFFF;
 	border-style: solid;
 	border-radius: 10px;
 	border-width: 3px;
 	border-color: #000000;
+	padding: 0 50px;
 }
 
 /*INPUT FIELDS*/

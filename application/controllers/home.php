@@ -20,10 +20,7 @@ class Home extends CI_Controller
 
 	function index()
 	{
-		echo 'Welcome Home!';
-		echo '<pre>';
-		var_dump($this->session->userdata('logged_in'));
-		echo anchor('logout','Logout');
+		$this->load->template($this->session_data);
 	}
 }
 ?>

@@ -75,6 +75,7 @@ $autoload['helper'] = array(
 						'form',
 						'date',
 						'html',
+						'datecompute'
 						);
 
 

@@ -16,19 +16,19 @@
 		<script>
 			$(document).ready(function()
 			{
-				$('#register_id').hide();
+				$('#register').hide();
 				$('#birthdate').datepicker({
 					format: 'yyyy-mm-dd'
 				});
 				
 				//CLEAR FORM
 				$('#clear').click(function(){
-					$('form#register')[0].reset();
+					$('#register')[0].reset();
 				});
 
 				//REGISTER FORM AS DIALOG
 				$('#create').click(function(){
-					$('#register_id').dialog({
+					$('#register').dialog({
 						width: 400,
 						closeText: "[X]" ,
 						draggable: false,
@@ -40,6 +40,9 @@
 						hide: {
 							effect: "blind",
 							duration: 500
+						},
+						close: function(){
+							$('#register')[0].reset();
 						}
 					});
 				});
@@ -68,11 +71,31 @@
 				});
 
 				// VALIDATE CREATE ACCOUNT
+				jQuery.validator.addMethod('regEx', function(value, element){ //REGEX VALIDATION FOR USERNAME alphanumeric keys only
+					var regex = new RegExp("^[a-zA-Z0-9]+$");
+					var key = value;
+					if(!regex.test(key))
+					{
+						return false;
+					}
+					return true;
+				});
 				$("form#register").validate({
     			rules: {
     				username: {
     					required: true,
-    					minlength: 5
+    					minlength: 5,
+    					regEx: true,
+    					remote: {
+    						url: '<?=base_url();?>account/check_exist/user',
+    						type: 'POST',
+    						data: {
+    							username: function()
+    							{
+    								return $('#username_reg').val();
+    							}
+    						}
+    					}
     				},
     			    password: {
     			        required: true,
@@ -95,13 +118,25 @@
     		    	},
     		    	email: {
     		    		required: true,
-    		    		email: true
+    		    		email: true,
+    		    		remote: {
+    						url: '<?=base_url();?>account/check_exist/user_details',
+    						type: 'POST',
+    						data: {
+    							email: function()
+    							{
+    								return $('#email').val();
+    							}
+    						}
+    					}
     		    	}
     			},
     			messages: {
     				username: {
     					required: "Username is required",
-    					minlength: "Username must be atleast 5 characters long"
+    					minlength: "Username must be atleast 5 characters long",
+    					regEx: "Only Aplhanumeric keys are allowed",
+    					remote: "Username already exist, please use other username"
     				},
     			    password: {
     			        required: "Please provide a password",
@@ -123,7 +158,8 @@
     	    			date: "Please enter a valid date"
     	    		},
     	    		email: {
-    	    			required: 'E-Mail address is required'
+    	    			required: 'E-Mail address is required',
+    	    			remote: "E-mail already in used, please use other e-mail address"
     	    		}
     			}
 			});
@@ -159,18 +195,16 @@
 			<?php echo form_close();?>
 		</div>
 
-		<div id="register_id" align="center">
-			<h3>Register</h3>
 			<?php echo validation_errors();?>
 			<?php echo form_open('register', array('id'=>'register'));?>
 			<?php
+				echo '<center><h3>Register</h3></center>';
 				$table = array(
-					'table_open' => '<table border="0" cellpadding="4" cellspacing="0">',
+					'table_open' => '<table border="0" cellpadding="7" cellspacing="0">',
 					'table_close' => '</table>'
 				);
 				$input = array(
-					array('',''),
-					array('Username',form_input(array('name'=>'username','id'=>'username','size'=>'20','placeholder'=>'Username','class'=>'form-control'))),
+					array('Username',form_input(array('name'=>'username','id'=>'username_reg','size'=>'20','placeholder'=>'Username','class'=>'form-control'))),
 					array('Password',form_password(array('name'=>'password','id'=>'reg_pass','size'=>'20','placeholder'=>'Password','class'=>'form-control'))),
 					array('Confirm Password',form_password(array('name'=>'conf_pass','id'=>'conf_pass','size'=>'20','placeholder'=>'Confirm Password','class'=>'form-control'))),
 					array('First Name',form_input(array('name'=>'firstname','id'=>'firstname','size'=>'20','placeholder'=>'First Name','class'=>'form-control'))),
@@ -184,7 +218,6 @@
 				echo $this->table->generate($input);
 			?>
 			<?php echo form_close();?>
-		</div>
 	</body>
 </html>
 

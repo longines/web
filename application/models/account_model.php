@@ -24,12 +24,14 @@ class Account_model extends CI_Model
 		{
 			$query = $this->db->set($data);
 			$query = $this->db->set('password',"PASSWORD('".$data['password']."')", FALSE);
-			return $query = $this->db->insert($table);
+			$query = $this->db->insert($table);
+			return $query = $this->db->insert_id();
 		}
 		else
 		{
 			$query = $this->db->set($data);
-			return $query = $this->db->insert($table);
+			$query = $this->db->insert($table);
+			return $query = $this->db->insert_id();
 		}
 	}
 
@@ -37,6 +39,22 @@ class Account_model extends CI_Model
 	{
 		$query = $this->db->select($select);
 		$query = $this->db->where('id',$id);
+		$query = $this->db->get($table);
+
+		if($query->num_rows())
+		{
+			return $query->result_array();
+		}
+		else
+		{
+			return NULL;
+		}
+	}
+
+	function getRecordByField($table,$data,$select='')
+	{
+		$query = $this->db->select($select);
+		$query = $this->db->where($data);
 		$query = $this->db->get($table);
 
 		if($query->num_rows())

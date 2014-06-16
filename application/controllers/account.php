@@ -43,6 +43,7 @@ class Account extends CI_Controller
 						'middlename' => $details[0]['middlename'],
 						'lastname' => $details[0]['lastname'],
 						'birthdate' => $details[0]['birthdate'],
+						'age' => computeAge($details[0]['birthdate']),
 						'email' => $details[0]['email']
 						);
 			$this->session->set_userdata('logged_in',$sess_array);
@@ -51,7 +52,7 @@ class Account extends CI_Controller
 		}
 		else
 		{
-			$this->form_validation->set_message('check_database','Invalid username and password.');
+			$this->form_validation->set_message('check_database','Unregisterd Account');
 			return FALSE;
 		}
 	}
@@ -62,10 +63,10 @@ class Account extends CI_Controller
 		$this->form_validation->set_rules('password','Password','trim|required|xss_clean');
 		$this->form_validation->set_rules('conf_pass','Confirm Password','trim|required|xss_clean|matches[password]');
 		$this->form_validation->set_rules('firstname','Firstname','trim|required|xss_clean');
-		$this->form_validation->set_rules('middlename','Middlename','trim|required|xss_clean');
+		$this->form_validation->set_rules('middlename','Middlename','trim|xss_clean');
 		$this->form_validation->set_rules('lastname','Lastname','trim|required|xss_clean');
 		$this->form_validation->set_rules('birthdate','Birth Date','trim|required|xss_clean');
-		$this->form_validation->set_rules('email','E-mail','trim|required|xss_clean|valid_email');
+		$this->form_validation->set_rules('email','E-mail','trim|required|xss_clean|valid_email|is_unique[user_details.email]');
 
 		if(isset($_POST['usertype']))
 		{
@@ -74,7 +75,7 @@ class Account extends CI_Controller
 
 		if($this->form_validation->run() == FALSE)
 		{
-			$this->session->set_flashdata('result',validation_error());
+			$this->session->set_flashdata('result',validation_errors());
 			redirect('','refresh');
 		}
 		else
@@ -121,6 +122,36 @@ class Account extends CI_Controller
 					redirect('','refresh');
 				}
 			}
+		}
+	}
+
+	function check_exist($table)
+	{
+		$username = $this->input->post('username');
+		$email = $this->input->post('email');
+
+		if($table == 'user')
+		{
+			$data = array(
+					'username' => $username
+					);
+		}
+		elseif($table == 'user_details')
+		{
+			$data = array(
+					'email' => $email
+					);
+		}
+
+		$result = $this->account_model->getRecordByField($table,$data);
+
+		if($result)
+		{
+			echo json_encode(FALSE);
+		}
+		else
+		{
+			echo json_encode(TRUE);
 		}
 	}
 }
