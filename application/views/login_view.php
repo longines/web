@@ -173,11 +173,6 @@
 			<?php echo validation_errors();?>
 			<?php echo form_open('login',array('id'=>'login'));?>
 			<?php
-				if($this->session->flashdata('result') != '')
-				{
-					echo $this->session->flashdata('result');
-				}
-
 				echo '<div class="login_field">
 						<ul>
 							<li>'.form_input(array('name'=>'username','id'=>'username','placeholder'=>'Enter Username','size'=>'20')).'</li>
@@ -194,8 +189,7 @@
 			?>
 			<?php echo form_close();?>
 		</div>
-
-			<?php echo validation_errors();?>
+		
 			<?php echo form_open('register', array('id'=>'register'));?>
 			<?php
 				echo '<center><h3>Register</h3></center>';

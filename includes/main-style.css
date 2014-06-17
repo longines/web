@@ -3,6 +3,58 @@
 	z-index: 999999;
 }
 
+/*INPUT FIELDS*/
+input[type=text],
+input[type=password]
+{
+	width: 200px;
+	height: 35px;
+	border-color: #DDDDDD;
+	border-style: solid;
+    border-radius: 10px;
+    text-align: center;
+}
+input[type=text]:focus,
+input[type=password]:focus
+{
+    box-shadow: 0 0 5px #1C6ACC;
+    border: 1px #1C6ACC;
+}
+input[type=submit]
+{
+	background-color: #27ae60; 
+}
+input[type=submit]:hover
+{
+	background: #2ecc71;
+	text-decoration: none;
+}
+#login_submit, #create
+{
+	/*color: #ffffff;*/
+	width: 200px;
+	height: 35px;
+	border: 0px;
+	border-radius: 10px;
+	outline: 0px none;
+}
+#create
+{
+	background: #2980b9;
+}
+#create:hover {
+	background: #3498db;
+	text-decoration: none;
+}
+.search
+{
+	width: 100px;
+	height: 35px;
+	border: 0px;
+	border-radius: 10px;
+	outline: 0px none;
+}
+
 /*LOGIN VIEW*/
 #login_id
 {
@@ -57,46 +109,47 @@
 	padding: 0 50px;
 }
 
-/*INPUT FIELDS*/
-input[type=text],
-input[type=password]
+/*HEADER NAVIGATION*/
+nav
 {
-	width: 200px;
-	height: 35px;
-	border-color: #DDDDDD;
-	border-style: solid;
-    border-radius: 10px;
-    text-align: center;
+	background-color: #34495e;
+	width: 100%;
+	height: 50px;
+	min-width: 1000px;
+	margin: 0px;
+	top: 0;
+	position: relative;
+	overflow: hidden;
+	text-align: center;
+	white-space: nowrap;
+	z-index: 100;
 }
-input[type=text]:focus,
-input[type=password]:focus
+nav ul
 {
-    box-shadow: 0 0 5px #1C6ACC;
-    border: 1px #1C6ACC;
+	width: 80%;
+	height: 50px;
+	list-style: none;
+	display: inline-block;
+	padding: 0;
+	border-right: 1px solid #7f8c8d;
+	border-left: 1px solid #7f8c8d;
 }
-input[type=submit]
+nav li
 {
-	background-color: #009900; 
+	display: inline-block;
+	padding: 8px;
+	color: #FFFFFF;
+	white-space: nowrap;
+	text-align: center;
 }
-input[type=submit]:hover
+nav li:nth-child(-n+2)
 {
-	background: #00b100;
-	text-decoration: none;
+	position: relative;
+	right: 15%;
 }
-#login_submit, #create
+nav li:nth-child(n+3)
 {
-	color: #ffffff;
-	width: 200px;
-	height: 35px;
-	border: 0px;
-	border-radius: 10px;
-	outline: 0px none;
+	position: relative;
+	left: 10%;
 }
-#create
-{
-	background: #3498db;
-}
-#create:hover {
-	background: #3cb0fd;
-	text-decoration: none;
-}
+

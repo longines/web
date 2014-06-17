@@ -52,7 +52,7 @@ class Account extends CI_Controller
 		}
 		else
 		{
-			$this->form_validation->set_message('check_database','Unregisterd Account');
+			$this->form_validation->set_message('check_database','Unregistered Account');
 			return FALSE;
 		}
 	}

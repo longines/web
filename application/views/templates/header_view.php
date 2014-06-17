@@ -16,10 +16,37 @@
 	</head>
 	<body>
 		<?php
-			echo "Welcome Home!";
+			// GET SESSION AND OTHER VARIABLES OF HEADER
 			$session_data = $this->session->userdata('logged_in');
-			var_dump($session_data);
-			echo anchor('logout','Logout');
+			$name = $session_data['firstname'].' '.$session_data['middlename'].' '.$session_data['lastname'];
+			$logout = anchor('logout','Logout',array('id'=>'logout'));
+			$search = '<div class="search_div">
+						<input type="text" size="50" placeholder="Search..."/>
+						<input type="submit" class="search" value="Search" name="submit"></input>
+						</div>';
+
+			// ARRAY LINKS
+			$links = array();
+			array_push($links, "Welcome Home!");
+			array_push($links,$search);
+			array_push($links, $name);
+			array_push($links, $logout);
+			//ARRAY TO ARRAY
+			$x = array();
+			array_push($x, $links);
+
+			//NAVIGATION
+			echo '<nav>
+			<ul>';
+				foreach($x as $key => $value)
+				{
+					foreach($value as $links)
+					{
+						echo '<li>'.$links.'</li>';
+					}
+				}
+			echo '</ul>
+			</nav>';
 		?>
 	</body>
 </html>
