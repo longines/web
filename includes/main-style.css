@@ -144,12 +144,13 @@ nav li
 }
 nav li:nth-child(-n+2)
 {
-	position: relative;
-	right: 15%;
+	display: inline-block;
+	position: absolute;
+	right: 150px;
 }
 nav li:nth-child(n+3)
 {
 	position: relative;
-	left: 10%;
+	left: 0;
 }
 
