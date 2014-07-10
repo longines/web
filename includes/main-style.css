@@ -142,7 +142,7 @@ nav li
 	white-space: nowrap;
 	text-align: center;
 }
-nav li:nth-child(-n+2)
+/*nav li:nth-child(-n+2)
 {
 	display: inline-block;
 	position: absolute;
@@ -153,4 +153,4 @@ nav li:nth-child(n+3)
 	position: relative;
 	left: 0;
 }
-
+*/

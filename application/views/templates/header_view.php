@@ -12,7 +12,7 @@
 		<!-- JQUERY/JAVASCRIPTS -->
 		<script src="http://code.jquery.com/jquery.js"></script><!-- script for jQuery Core -->
 		<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script><!-- script for jQuery UI -->
-		<script src="http://jquery.bassistance.de/validate/jquery.validate.js"></script> <!-- jQuery Form Validator -->
+		<script src="<?php echo base_url();?>includes/js/jquery.validate.js"></script> <!-- jQuery Form Validator -->
 	</head>
 	<body>
 		<?php

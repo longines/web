@@ -20,7 +20,10 @@ class Home extends CI_Controller
 
 	function index()
 	{
-		$this->load->template($this->session_data);
+		$loadedViews = array(
+						'home/home_automata_test' => NULL
+						);
+		$this->load->template($this->session_data,$loadedViews);
 	}
 }
 ?>
